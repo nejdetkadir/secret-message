@@ -39,6 +39,27 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
         delete $scope.users[data.id];
         $scope.$apply();
       });
+
+      $scope.sendMessage = () => {
+        const messageData = {
+          type: 1,
+          text: $scope.message,
+          username
+        };
+        $scope.messages.push(messageData);
+        $scope.message = '';
+        socket.emit('newMessage', {data: messageData});
+      };
+
+      socket.on('newMessage', (data) => {
+        $scope.messages.push(data.data);
+        $scope.$apply();
+      });
+
+      socket.on('initUsers', (data) => {
+        $scope.users = data;
+        $scope.$apply();
+      });
     }).catch((err) => {
       console.log(err);
     });

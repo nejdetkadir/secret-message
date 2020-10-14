@@ -29,5 +29,6 @@ block content
               .bubble.me(ng-if="message.type")
                 | {{message.text}}
           .write
-            input(type='text')
-            a.write-link.send(href='javascript:;')
+            form(ng-submit="sendMessage()")
+              input(ng-model='message', type='text')
+              button.write-link.send(type='submit')

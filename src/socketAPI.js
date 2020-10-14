@@ -12,11 +12,18 @@ io.on('connection', (socket) => {
     const userData = Object.assign(data, defaultData);
     users[socket.id] = userData;
     socket.broadcast.emit('newUser', userData);
+    socket.emit('initUsers', users);
   });
 
   socket.on('disconnect', () => {
     socket.broadcast.emit('disUser', users[socket.id]);
     delete users[socket.id];
+  });
+
+  socket.on('newMessage', (data) => {
+    let messageData = data.data;
+    messageData.type = 0;
+    socket.broadcast.emit('newMessage', {data: messageData})
   });
 });
 
