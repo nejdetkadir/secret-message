@@ -12,8 +12,8 @@ block content
             ul.tab
               li.onlineUsers
                 a Online Users
-          ul.people(ng-repeat="user in users")
-            li.person
+          ul.people
+            li.person(ng-repeat="user in users")
               span.name {{user.username}}
               span.preview ID: {{user.id}}
           .bottom
@@ -21,12 +21,13 @@ block content
           .top
             span
               span.name MESSAGES
-          .chat.active-chat(ng-repeat="message in messages")
-            .bubble.you
-              span Hakan Aydın
-              | I'm in California dreaming
-            .bubble.me ... about who we used to be.
-            .bubble.me Are you serious?
+          .chat.active-chat
+            div(ng-repeat="message in messages")
+              .bubble.you(ng-if="!message.type")
+                span {{message.username}}
+                | {{message.text}}
+              .bubble.me(ng-if="message.type")
+                | {{message.text}}
           .write
             input(type='text')
             a.write-link.send(href='javascript:;')

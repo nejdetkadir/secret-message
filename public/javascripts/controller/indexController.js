@@ -17,8 +17,26 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
       reconnectionDelay: 600
     }).then((socket) => {
       socket.emit('newUser', {username});
+
       socket.on('newUser', (data) => {
+        const messageData = {
+          type: (data.id === socket.id) ? 1 : 0,
+          text: 'Joined the room',
+          username: data.username
+        };
+        $scope.messages.push(messageData);
         $scope.users[data.id] = data;
+        $scope.$apply();
+      });
+
+      socket.on('disUser', (data) => {
+        const messageData = {
+          type: 0,
+          text: 'Left the room',
+          username: data.username
+        };
+        $scope.messages.push(messageData);
+        delete $scope.users[data.id];
         $scope.$apply();
       });
     }).catch((err) => {

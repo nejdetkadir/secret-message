@@ -13,6 +13,11 @@ io.on('connection', (socket) => {
     users[socket.id] = userData;
     socket.broadcast.emit('newUser', userData);
   });
+
+  socket.on('disconnect', () => {
+    socket.broadcast.emit('disUser', users[socket.id]);
+    delete users[socket.id];
+  });
 });
 
 module.exports = socketAPI;
