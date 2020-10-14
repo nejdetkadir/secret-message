@@ -8,6 +8,7 @@
   "license": "MIT",
   "homepage": "https://github.com/nejdetkadir/secret-message",
   "dependencies": {
-    "angular": "^1.8.1"
+    "angular": "^1.8.1",
+    "jquery": "^3.5.1"
   }
 }
