@@ -22,6 +22,10 @@ $ cd secret-message
 ``` bash 
 $ npm install && bower install
 ```
+- If you want to use any server, you must change url from /public/javascripts/controller/indexController.js:15
+```javascript
+const url = 'https://socketio-live-amongus.herokuapp.com';
+``` 
 ### Run the app
 ``` bash 
 $ npm start
