@@ -155,7 +155,7 @@ ul,li{
     background-color: var(--white);
 }
 .container .left .people .person .preview {
-    font-size: 14px;
+    font-size: 11px;
     display: inline-block;
     overflow: hidden !important;
     width: 70%;
