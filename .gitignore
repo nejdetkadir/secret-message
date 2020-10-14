@@ -1,3 +1,6 @@
+# secret and unused files
+.idea/
+
 # Logs
 logs
 *.log
