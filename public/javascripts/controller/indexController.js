@@ -10,12 +10,13 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
       return false;
   };
 
-  function initSocket(username) {
-    const url = 'http://localhost:3000'; // development
-    indexFactory.connectSocket(url, {
-      reconnectionAttempts: 3,
-      reconnectionDelay: 600
-    }).then((socket) => {
+  async function initSocket(username) {
+    try {
+      const url = 'https://anonymous-message.herokuapp.com'; // development
+      const socket = await indexFactory.connectSocket(url, {
+        reconnectionAttempts: 3,
+        reconnectionDelay: 600
+      });
       socket.emit('newUser', {username});
 
       socket.on('newUser', (data) => {
@@ -60,8 +61,8 @@ app.controller('indexController', ['$scope', 'indexFactory', ($scope, indexFacto
         $scope.users = data;
         $scope.$apply();
       });
-    }).catch((err) => {
-      console.log(err);
-    });
+    } catch (e) {
+      console.log(e);
+    }
   }
 }]);

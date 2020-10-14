@@ -397,8 +397,7 @@ ul,li{
 }
 
 .tab li{
-    width: 50%;
-    float: left;
+    width: 100%;
 }
 .tab li a{
     height:40px;
